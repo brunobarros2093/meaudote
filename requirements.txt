@@ -75,3 +75,4 @@ wadllib==1.3.6
 xdg==5
 xkit==0.0.0
 zipp==1.0.0
+django-widget-tweaks==1.5.0
