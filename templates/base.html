@@ -39,10 +39,22 @@
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chat-right-heart-fill" viewBox="0 0 16 16">
                             <path d="M16 2a2 2 0 0 0-2-2H2a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h9.586a1 1 0 0 1 .707.293l2.853 2.853a.5.5 0 0 0 .854-.353zM8 3.993c1.664-1.711 5.825 1.283 0 5.132-5.825-3.85-1.664-6.843 0-5.132"/>
                           </svg>
-                        <span>Adicionar Aumigo(a) encontrado</span>
+                        <span>Adicionar Aumigo(a)</span>
                     </a>
                 </li>
-                
+                {% if user.is_authenticated %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'logout' %}">
+                        <span>Logout</span>
+                    </a>
+                </li>
+            {% else %}
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'logout' %}">
+                    <span>Login</span>
+                </a>
+            </li>
+            {% endif %}
                 <hr class="sidebar-divider">
             </ul>
 
@@ -53,23 +65,16 @@
                         <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
                             <i class="fa fa-bars"></i>
                         </button>
-                        <a href="{%url 'login' %}">Login</a>   
-                        <ul class="navbar-nav ml-auto">
-                            <li class="nav-item dropdown no-arrow">
-                                <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <span class="mr-2 d-none d-lg-inline text-gray-800 small">
-                                        <i class="fas fa-cog"></i>
-                                    </span>
-                                </a>
-                                
-                                <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
-                                        <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                        Sair
-                                    </a>
-                                </div>
-                            </li>
-                        </ul>
+                      
+
+                        <div class="container d-flex justify-content-center">
+                            <form class="form-inline">
+                              <div class="form-group">
+                                <input class="form-control" type="search" placeholder="Search" aria-label="Search">
+                              </div>
+                              <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                            </form>
+                           </div>
                     </nav>
                     {% block conteudo %} {% endblock conteudo %}
 
