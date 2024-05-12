@@ -6,10 +6,10 @@ from django.contrib.auth.models import (
 
 class UsuarioManager(BaseUserManager):
 
-    def create_user(self, email, password=None):
+    def create_user(self, email, whatsapp ,password=None):
         usuario = self.model(
-            email=self.normalize_email(email)
-        )
+            email=self.normalize_email(email),
+            whatsapp=whatsapp)
         usuario.is_active = True
         usuario.is_staff = False
         usuario.is_superuser = False
@@ -20,8 +20,8 @@ class UsuarioManager(BaseUserManager):
 
         return usuario
 
-    def create_superuser(self, email, password):
-        usuario = self.create_user(self.normalize_email(email), password)
+    def create_superuser(self, email, whatsapp, password):
+        usuario = self.create_user(email=self.normalize_email(email), password=password, whatsapp=whatsapp)
 
         usuario.is_active = True
         usuario.is_staff = True
@@ -39,6 +39,12 @@ class Usuarios(AbstractBaseUser, PermissionsMixin):
         unique=True,
         verbose_name='E-mail do usuário',
         max_length=194,)
+    whatsapp = models.CharField(
+        max_length=15,
+        verbose_name='Whatsapp do tutor',
+        null=False,
+        blank=True,
+    )
     is_active = models.BooleanField(
         verbose_name='Usuario esta ativo',
         default=True,
@@ -52,7 +58,7 @@ class Usuarios(AbstractBaseUser, PermissionsMixin):
         verbose_name="Usuário é um superusuario"
     )
     # 1-N com Pets
-    aumigos = models.ForeignKey('aumigos.Aumigos', on_delete=models.CASCADE, null=True, blank=True)
+   # aumigos = models.ForeignKey(Aumigos, on_delete=models.CASCADE, null=True, blank=True)
     USERNAME_FIELD = "email"
     # atribui a criação de usuário para o novo Manager
     objects = UsuarioManager()
@@ -63,4 +69,4 @@ class Usuarios(AbstractBaseUser, PermissionsMixin):
         db_table = "usuarios"
 
     def __str__(self):
-        return self.email
+        return self.whatsapp
