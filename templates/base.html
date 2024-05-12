@@ -34,6 +34,7 @@
                         <span>Início</span>
                     </a>
                 </li>
+                {% if user.is_authenticated %}
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'cadastrar_pet' %}">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chat-right-heart-fill" viewBox="0 0 16 16">
@@ -42,6 +43,7 @@
                         <span>Adicionar Aumigo(a)</span>
                     </a>
                 </li>
+                {%endif%}
                 {% if user.is_authenticated %}
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'logout' %}">

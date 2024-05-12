@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from aumigos.forms import AumigosForm
 from aumigos.models import Aumigos
 from usuarios.models import Usuarios
@@ -21,7 +21,7 @@ def cadastrar_pet(request):
         if form.is_valid():
             form = form.save(commit=False)
             form.contato = Usuarios.objects.get(id=request.user.id).contato
-            return redirect(request, 'index.html')
+            return redirect('index.html')
         
 
     context = {
@@ -30,10 +30,10 @@ def cadastrar_pet(request):
     }
     return render(request, 'cadastrar_pet.html', context)
 
-def mais_informacoes(request):
-    pet = Aumigos.objects.get(id=id)
+def mais_informacoes(request, id):
+    pet = get_object_or_404(Aumigos, id=id)
     context = {
         'nome_pagina': 'Mais Informações',
-        'pet': pet,
+        'form': pet,
     }
     return render(request, 'mais_informacoes.html', context)

@@ -24,7 +24,7 @@
             <td>{{pet.cidade}}</td>
             <td>{{pet.localidade}}</td>
             <td>{{pet.porte}}</td>
-            <td><a href="#">Mais informação</a> </td>
+            <td><a href="{% url 'mais_informacoes' id=pet.id %}">Mais informação</a> </td>
           </tr>
         
           {%endfor%}
