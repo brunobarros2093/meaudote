@@ -37,15 +37,3 @@ class Aumigos(models.Model):
             return 'Sim'
         else:
             return 'Não'
-
-class Photo(models.Model):
-    photo = models.ImageField('foto', upload_to='')
-    aumigo = models.ForeignKey(Aumigos, on_delete=models.CASCADE)
-
-    class Meta:
-        ordering = ('pk',)
-        verbose_name = 'Foto'
-        verbose_name_plural = 'Fotos'
-
-    def __str__(self):
-        return str(self.aumigo)

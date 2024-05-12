@@ -12,19 +12,20 @@
                 <div class="form-row">
                     <div class="form-group col-md-12">
                         <label>Cidade</label>
-                        <input type="text" name="cidade" id="cidade" value="{{pet.cidade}}" class="form-control">
+                        <input type="text" name="cidade" id="cidade" value="{{form.cidade}}" class="form-control">
                     </div>
                     <div class="form-group col-md-12">
                         <label>Localidade</label>
-                        <input type="text" name="localidade" id="localidade" value="{{pet.localidade}}" class="form-control">
+                        <input type="text" name="localidade" id="localidade" value="{{form.localidade}}" class="form-control">
                     </div>
                     <div class="form-group col-md-12">
                         <label>Adotado ou encontrou tutor?</label>
-                        <input type="text" name="adotado" id="adotado" value="{{pet.get_adotado}}" class="form-control">
+                        <input type="text" name="adotado" id="adotado" value="{{form.get_adotado}}" class="form-control">
                     </div>
-                        {% for item in object.photos.all %}
-                         <img src="{{item.photo.url}}" alt="" class="img-thumbnail" width="150px;">
-                        {%endfor%}
+                    <div class="form-group col-md-12">
+                        <!-- {% for item in form.photos.all %} -->
+                         <img src="#" alt="" width="150px" height="150px" />
+                        <!-- {%endfor%} --> 
                     </div>
                 </div>
                 {% if user.is_authenticated %}

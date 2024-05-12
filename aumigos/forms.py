@@ -12,11 +12,3 @@ class AumigosForm(forms.ModelForm):
             'idade': forms.NumberInput(attrs={'class': 'form-control'}),
             'descricao': forms.Textarea(attrs={'class': 'form-control'}),
         }
-class AumigosPhotoForm(forms.ModelForm):
-    photo = forms.ImageField(required=False)
-    class Meta:
-        model = Aumigos
-        fields = ['cidade', 'localidade', 'porte', 'nome', 'photo']
-        widgets = {
-            'photo': forms.FileInput(attrs={'class': 'form-control'}),
-        }

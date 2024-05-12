@@ -1,5 +1,4 @@
 from django.contrib import admin
-from .models import Aumigos, Photo
+from .models import Aumigos
 
 admin.site.register(Aumigos)
-admin.site.register(Photo)
