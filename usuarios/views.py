@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth.decorators import login_required
 from aumigos.forms import AumigosForm
-from aumigos.models import Aumigos
-from usuarios.models import Usuarios
+from aumigos.models import Aumigos, Photo
 
 # Create your views here.
 def index(request):
@@ -12,16 +12,16 @@ def index(request):
     }
     return render(request, 'index.html', context)
 
-
+@login_required
 def cadastrar_pet(request):
-    form = AumigosForm()
-    #contato = Usuarios.objects.get(id=request.user.id).contato
+    form = AumigosForm(request.POST)
     if request.method == 'POST':
-        form = AumigosForm(request.POST, request.FILES)
+        fotos = request.FILES.get('photo')
         if form.is_valid():
-            form = form.save(commit=False)
-            form.contato = Usuarios.objects.get(id=request.user.id).contato
-            return redirect('index.html')
+            aumigo = form.save()
+            Photo.objects.create(photo=fotos, aumigo=aumigo)
+            #form.contato = Usuarios.objects.get(id=request.user.id).contato
+            return redirect('mais_informacoes', id=aumigo.id)
         
 
     context = {
@@ -32,8 +32,16 @@ def cadastrar_pet(request):
 
 def mais_informacoes(request, id):
     pet = get_object_or_404(Aumigos, id=id)
+    form = AumigosForm(request.POST)
+    if request.method == 'POST':
+        form = AumigosForm(request.POST, request.FILES, instance=pet)
+        if form.is_valid():
+            form.save()
+            return redirect('index.html')
     context = {
         'nome_pagina': 'Mais Informações',
-        'form': pet,
+        'form': form,
+        'pet':pet 
     }
     return render(request, 'mais_informacoes.html', context)
+
