@@ -24,13 +24,11 @@ class Aumigos(models.Model):
         null=True,
         blank=True
     )
-    foto = models.ManyToManyField('aumigos.Photo', verbose_name='Foto do aumigo', related_name='fotos', blank=True)
     adotado = models.BooleanField(
         default=False,
         verbose_name='Aumigo foi adotado?',
     )
     contato = models.ForeignKey(Usuarios, on_delete=models.CASCADE, null=True, blank=True)
-
     def __str__(self):
         return self.nome
     
@@ -42,11 +40,12 @@ class Aumigos(models.Model):
 
 class Photo(models.Model):
     photo = models.ImageField('foto', upload_to='')
-    aumigo = models.ForeignKey(Aumigos,verbose_name='foto', related_name='aumigos', on_delete=models.CASCADE, null=True, blank=True)
+    aumigo = models.ForeignKey(Aumigos, on_delete=models.CASCADE)
 
     class Meta:
-        ordering = ('pk', )
+        ordering = ('pk',)
         verbose_name = 'Foto'
         verbose_name_plural = 'Fotos'
+
     def __str__(self):
         return str(self.aumigo)

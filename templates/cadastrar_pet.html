@@ -15,9 +15,10 @@
                 <small>O asteristico (*) indica campo obrigatório.</small>
             </div>
 
-            <form method="POST" enctype="multipart/form-data">
+            <form method="POST" enctype="multipart/form-data"> 
                 <div class="form-row">
                 {% csrf_token %}
+                
                     {% for field in form %} 
                         <div class="form-group col-md-12">
                             <label>{{field.label}} {% if field.field.required %}*{%endif%}</label>
@@ -25,7 +26,8 @@
                         </div>
                     {% endfor %}
                 </div>
-                <div class="text-right">
+      
+                <div class="form-group text-right">
                     <a href="{% url 'index' %}" class="btn btn-secondary text-white">Cancelar</a>
                     <button class="btn btn-primary" type="submit">Registrar</button>
                 </div>

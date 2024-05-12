@@ -23,9 +23,7 @@
                         <input type="text" name="adotado" id="adotado" value="{{pet.get_adotado}}" class="form-control">
                     </div>
                         {% for item in object.photos.all %}
-                        {% if item.photo %}
-                            <img src="{{item.photo.url}}" alt="" class="img-thumbnail">
-                        {%endif%}
+                         <img src="{{item.photo.url}}" alt="" class="img-thumbnail" width="150px;">
                         {%endfor%}
                     </div>
                 </div>
